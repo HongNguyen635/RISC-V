@@ -10,7 +10,7 @@ module imem (
 	initial
 		// read file into RAM, the file content is in hex
 		// to read binary, use readmemb
-		$readmemh("D:/School Stuff/Capstone/riscvtest.txt", RAM);
+		$readmemh("riscvtest.txt", RAM);
 		
 	assign rd = RAM[address[31:2]]; // word aligned
 	
