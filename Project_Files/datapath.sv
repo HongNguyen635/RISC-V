@@ -1,7 +1,7 @@
 module datapath(
 	input 	logic 		 clk, reset,
-	input 	logic [1:0]  ResultSrc,
-	input 	logic 		 PCSrc, ALUSrc,
+	input 	logic [1:0]  ResultSrc, PCSrc,
+	input 	logic 		 ALUSrc,
 	input 	logic 		 RegWrite,
 	input 	logic [1:0]  ImmSrc,
 	input 	logic [2:0]  ALUControl,
@@ -24,7 +24,8 @@ module datapath(
 	adder pcadd4(PC, 32'd4, PCPlus4);
 	adder pcaddbranch(PC, ImmExt, PCTarget);
 	
-	mux2 #(32) pcmux(PCPlus4, PCTarget, PCSrc, PCNext);
+	// mux2 #(32) pcmux(PCPlus4, PCTarget, PCSrc, PCNext);
+	mux3 #(32) pcmux(PCPlus4, PCTarget, ALUResult, PCSrc, PCNext);
 	
 	// register file logic
 	regfile rf(clk, RegWrite, Instr[19:15], Instr[24:20],
