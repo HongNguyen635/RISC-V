@@ -4,7 +4,7 @@ module datapath(
 	input 	logic 		 ALUSrc,
 	input 	logic 		 RegWrite,
 	input 	logic [1:0]  ImmSrc,
-	input 	logic [2:0]  ALUControl,
+	input 	logic [3:0]  ALUControl,
 	output 	logic 		 Zero,
 	output 	logic [31:0] PC,
 	input 	logic [31:0] Instr,
