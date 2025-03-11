@@ -3,9 +3,10 @@ module datapath(
 	input 	logic [1:0]  ResultSrc, PCSrc,
 	input 	logic 		 ALUSrc,
 	input 	logic 		 RegWrite,
-	input 	logic [1:0]  ImmSrc,
+	input 	logic [2:0]  ImmSrc,
 	input 	logic [3:0]  ALUControl,
 	output 	logic 		 Zero,
+	output	logic			 Lt,
 	output 	logic [31:0] PC,
 	input 	logic [31:0] Instr,
 	output 	logic [31:0] ALUResult, WriteData,
@@ -36,7 +37,7 @@ module datapath(
 	// ALU logic
 	mux2 #(32) srcbmux(WriteData, ImmExt, ALUSrc, SrcB);
 	
-	alu alu(SrcA, SrcB, ALUControl, ALUResult, Zero);
+	alu alu(SrcA, SrcB, ALUControl, ALUResult, Zero, Lt);
 	
 	mux3 #(32) resultmux(ALUResult, ReadData, PCPlus4, ResultSrc, Result);
 	

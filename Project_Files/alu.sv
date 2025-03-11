@@ -3,7 +3,9 @@ module alu (
 	input 	logic [31:0] b,
 	input 	logic [3:0]  alucontrol,
 	output 	logic [31:0] result,
-	output	logic			 zero);
+	output	logic			 zero,
+	output	logic			 lt
+	);
 	
 	// condinvb = check to invert b if subtract for 2s compliment
 	logic [31:0] condinvb, sum;
@@ -21,6 +23,9 @@ module alu (
 							
 	// zero flag
 	assign zero = (sum == 32'b0);
+
+	//less than flag
+   	assign lt = (sum[31] ^ overflow);
 	
 	// values for shifting
 	assign shamt = {{27{1'b0}}, {b[4:0]}};
