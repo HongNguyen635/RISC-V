@@ -25,7 +25,7 @@ module alu (
 	assign zero = (sum == 32'b0);
 
 	//less than flag
-   	assign lt = (sum[31] ^ overflow);
+	assign lt = (sum[31] ^ overflow);
 	
 	// values for shifting
 	assign shamt = {{27{1'b0}}, {b[4:0]}};
@@ -38,10 +38,11 @@ module alu (
 			4'b0001: result = sum; // subtract
 			4'b0010: result = a & b; // and
 			4'b0011: result = a | b; // or
+			4'b0100: result = a ^ b; // xor
 			4'b0101: result = (sum[31] ^ overflow); // slt
 			4'b0110: result = shift << shamt; // slli
-			4'b1110: result = shift >>> shamt; // srai
 			4'b1000: result = shift >> shamt; // srli
+			4'b1110: result = shift >>> shamt; // srai
 			default: result = 32'bx; // undefined
 		endcase
 		

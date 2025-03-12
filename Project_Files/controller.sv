@@ -25,7 +25,12 @@ module controller (
 	always_comb begin
 		if (Jalr)
 			PCSrc = 2'b10;
-		else if ((Branch & Zero) | (Branch & Lt) | Jump)
+
+		// For branch instructions:
+      	// - If BEQ (funct3 == 3'b000), branch when Zero is true.
+      	// - If BNE (funct3 == 3'b001), branch when Zero is false.
+		// - If BLT (funct3 == 3'b100), branch when Lt is true.
+		else if ((Branch && ((funct3 == 3'b000 && Zero) || (funct3 == 3'b001 && !Zero) || (funct3 == 3'b100 && Lt))) || Jump)
 			PCSrc = 2'b01;
 		else
 			PCSrc = 2'b00;
