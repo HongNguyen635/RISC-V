@@ -34,6 +34,44 @@ module dmem (
 		
 endmodule
 
+// instruction memory - reading from external EEPROM
+module imem_eeprommodule (
+	input 	logic [31:0] address,
+	output 	logic [31:0] rd);
+	
+	// TODO:
+	// similar to the internal imem module above
+	// modifying it in a way that it reads 4 consecutive bytes
+	// then assemble into a 32-bit word
+	// then assign it to rd (just like the last line
+	// in the internal imem module).
+	//
+	// Will need a state machine that is very
+	// similar to the one in EEPROM read code
+	// in the refactor SV file folder.
+	
+endmodule
+
+// data memory
+module dmem_sram (
+	input 	logic 		 clk, we,
+	input 	logic [31:0] a, wd,
+	output 	logic [31:0] rd);
+	
+	// TODO:
+	// similar to the internal dmem module
+	// here dmem is the SRAM
+	// for read, do the similar thing as
+	// EEPROM. Read byte wise, then assembly it
+	// into a 32-bit word.
+	// for write, divide the 32-bit input word
+	// and write each byte to the SRAM
+	//
+	// will need a state machine that is very similar
+	// to imem_eeprom above.
+		
+endmodule
+
 // register file
 module regfile (
 	input 	logic 		clk,
