@@ -25,11 +25,21 @@ module aludec (
 					3'b100: ALUControl = 4'b0100;  // xor, xori
 					3'b110: ALUControl = 4'b0011; // or, ori
 					3'b111: ALUControl = 4'b0010; // and, andi
-					3'b001: ALUControl = 4'b0110; // slli
-					3'b101: if (funct7b5)
-									ALUControl = 4'b1110; // srai
-							  else
-									ALUControl = 4'b1000; // srli
+					3'b001: if (opb5) // opb5 means register operation
+									ALUControl = 4'b1001; // sll
+								else
+									ALUControl = 4'b0110; // slli
+					3'b101: if (funct7b5) begin
+									if (opb5)
+										ALUControl = 4'b1011; // sra
+									else
+										ALUControl = 4'b1000; // srai
+							  end else begin
+									if (opb5)
+										ALUControl = 4'b1010; // srl
+									else
+										ALUControl = 4'b0111; // srli
+								end
 					default: ALUControl = 4'bxxxx; // ???
 				endcase
 			endcase
