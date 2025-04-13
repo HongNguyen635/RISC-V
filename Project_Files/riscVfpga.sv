@@ -26,8 +26,8 @@ module riscVfpga (
 	riscvsingle rvsingle(clk, reset, PC, Instr, MemWrite, DataAdr, WriteData, ReadData);
 	
 	// instruction memory & data memory
-	imem imem(PC, Instr);
-	dmem dmem(clk, MemWrite, DataAdr, WriteData, ReadData);
+	imemEEPROM imem(PC, Instr);
+	dmemSRAM dmem(clk, MemWrite, DataAdr, WriteData, ReadData);
 	
 	
 	

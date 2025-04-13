@@ -10,7 +10,8 @@ module imem (
 	initial
 		// read file into RAM, the file content is in hex
 		// to read binary, use readmemb
-		$readmemh("testShift.txt", RAM);
+		// $readmemh("D:/Capstone/RiscV_Current/riscvtest.txt", RAM);
+		$readmemh("D:/Capstone/RiscV_Current/instruction.bin", RAM);
 		
 	assign rd = RAM[address[31:2]]; // word aligned
 	
@@ -35,7 +36,7 @@ module dmem (
 endmodule
 
 // instruction memory - reading from external EEPROM
-module imem_eeprommodule (
+module imemEEPROM (
 	input 	logic [31:0] address,
 	output 	logic [31:0] rd);
 	
@@ -53,7 +54,7 @@ module imem_eeprommodule (
 endmodule
 
 // data memory
-module dmem_sram (
+module dmemSRAM (
 	input 	logic 		 clk, we,
 	input 	logic [31:0] a, wd,
 	output 	logic [31:0] rd);
